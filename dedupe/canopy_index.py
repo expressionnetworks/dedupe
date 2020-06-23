@@ -19,17 +19,17 @@ class CanopyIndex(TextIndex):  # pragma: no cover
 
     def initSearch(self):
         N = len(self.index._docweight)
-        threshold = int(max(1000, N * 0.05))
+        # threshold = int(max(1000, N * 0.05))
 
         self._wids_dict = {}
 
         bucket = self.index.family.IF.Bucket
         for wid, docs in self.index._wordinfo.items():
-            if len(docs) > threshold:
-                word = self.lexicon._words[wid]
-                logger.info('Removing stop word {}'.format(word))
-                del self.index._wordinfo[wid]
-                continue
+            # if len(docs) > threshold:
+            #     word = self.lexicon._words[wid]
+            #     logger.info('Removing stop word {}'.format(word))
+            #     del self.index._wordinfo[wid]
+            #     continue
             if isinstance(docs, dict):
                 docs = bucket(docs)
             idf = numpy.log1p(N / len(docs))
