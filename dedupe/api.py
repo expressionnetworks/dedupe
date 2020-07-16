@@ -236,7 +236,7 @@ class DedupeMatching(IntegralMatching):
             con.executemany("INSERT INTO blocking_map values (?, ?)",
                             self.fingerprinter(data.items()))
 
-            self.fingerprinter.reset_indices()
+            #self.fingerprinter.reset_indices()
 
             con.execute('''CREATE INDEX block_key_idx
                            ON blocking_map (block_key)''')
@@ -381,7 +381,7 @@ class RecordLinkMatching(IntegralMatching):
             con.executemany("INSERT INTO blocking_map_b values (?, ?)",
                             self.fingerprinter(data_2.items(), target=True))
 
-            self.fingerprinter.reset_indices()
+            #self.fingerprinter.reset_indices()
 
             con.executescript('''CREATE INDEX block_key_a_idx
                                  ON blocking_map_a (block_key);
@@ -1040,7 +1040,7 @@ class ActiveMatching(Matching):
         self.predicates = self.active_learner.learn_predicates(
             recall, index_predicates)
         self._fingerprinter = blocking.Fingerprinter(self.predicates)
-        self.fingerprinter.reset_indices()
+        #self.fingerprinter.reset_indices()
 
     def write_training(self, file_obj: TextIO) -> None:  # pragma: no cover
         """
