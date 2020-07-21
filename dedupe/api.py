@@ -222,6 +222,9 @@ class DedupeMatching(IntegralMatching):
 
         self.fingerprinter.index_all(data)
 
+        self.push_blocks_sql(data)
+
+    def push_blocks_sql(data):
         id_type = core.sqlite_id_type(data)
 
         # Blocking and pair generation are typically the first memory
@@ -359,6 +362,9 @@ class RecordLinkMatching(IntegralMatching):
 
         self.fingerprinter.index_all(data_2)
 
+        self.push_pairs_sql(data1, data2)
+
+    def push_pairs_sql(data1, data2):
         id_type_a = core.sqlite_id_type(data_1)
         id_type_b = core.sqlite_id_type(data_2)
 
@@ -641,7 +647,10 @@ class GazetteerMatching(Matching):
         """
 
         self.fingerprinter.index_all(data)
+        
+        self.push_index_sql(data)
 
+    def push_index_sql(data):
         id_type = core.sqlite_id_type(data)
 
         con = sqlite3.connect(self.db)
